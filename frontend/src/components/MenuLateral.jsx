@@ -1,6 +1,4 @@
 // Rôle : la barre latérale de navigation, visible sur toutes les pages.
-// NavLink est un lien React Router : il change de page SANS recharger le site,
-// et ajoute la classe "actif" au lien de la page courante.
 import { NavLink } from "react-router-dom";
 
 function MenuLateral() {
@@ -13,6 +11,9 @@ function MenuLateral() {
         </NavLink>
         <NavLink to="/produits" className="menu-lien">
           Produits
+        </NavLink>
+        <NavLink to="/mouvements" className="menu-lien">
+          Mouvements
         </NavLink>
       </nav>
     </aside>

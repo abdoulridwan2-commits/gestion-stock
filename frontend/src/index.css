@@ -206,3 +206,17 @@ h1 {
   padding: 12px 0;
   border-top: 1px solid #eef2f1;
 }
+/* Liste déroulante des formulaires, même style que les champs de saisie */
+.champs select {
+  padding: 10px 12px;
+  border: 1px solid #c9d3d1;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #fff;
+}
+
+/* Étiquette verte pour une entrée de stock */
+.badge-entree {
+  background: #e3f2ef;
+  color: #0b6e64;
+}
