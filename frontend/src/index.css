@@ -220,3 +220,37 @@ h1 {
   background: #e3f2ef;
   color: #0b6e64;
 }
+.actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.droite-produit {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.bouton-secondaire,
+.bouton-danger {
+  border-radius: 10px;
+  padding: 0 14px;
+  min-height: 40px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  background: #fff;
+}
+
+.bouton-secondaire {
+  border: 1px solid #0b6e64;
+  color: #0b6e64;
+}
+
+.bouton-danger {
+  border: 1px solid #a3200f;
+  color: #a3200f;
+}
