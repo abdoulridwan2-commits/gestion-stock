@@ -1,5 +1,8 @@
 // Rôle : la page du tableau de bord. Elle va chercher les chiffres à Django
 // et les affiche dans des cartes.
+import GraphiqueSemaine from "../components/GraphiqueSemaine";
+import ListeAlertes from "../components/ListeAlertes";
+
 import { useEffect, useState } from "react";
 import api from "../api";
 import CarteKpi from "../components/CarteKpi";
@@ -34,6 +37,10 @@ function TableauDeBord() {
           valeur={`${valeur} FCFA`}
           couleur="#0B6E64"
         />
+        <div className="grille-deux">
+          <GraphiqueSemaine donnees={donnees.mouvements_semaine} />
+          <ListeAlertes produits={donnees.a_reapprovisionner} />
+        </div>
         <CarteKpi
           titre="Produits"
           valeur={donnees.nombre_produits}
