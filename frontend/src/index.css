@@ -116,3 +116,93 @@ h1 {
   background: #fee4e2;
   color: #a3200f;
 }
+/* Cadre : menu à gauche, contenu à droite */
+.cadre {
+  display: flex;
+  min-height: 100vh;
+}
+
+.contenu {
+  flex: 1;
+  min-width: 0;
+}
+
+.menu {
+  width: 230px;
+  background: #0b3b36;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+.menu-logo {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 8px 28px;
+}
+
+.menu-lien {
+  display: block;
+  padding: 12px 14px;
+  border-radius: 10px;
+  color: #b9d4cf;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  margin-bottom: 4px;
+}
+
+.menu-lien.active {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+/* Sur téléphone, le menu passe en haut */
+@media (max-width: 700px) {
+  .cadre {
+    flex-direction: column;
+  }
+  .menu {
+    width: 100%;
+  }
+}
+
+/* Formulaire */
+.champs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.champs label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  color: #5b6764;
+}
+
+.champs input {
+  padding: 10px 12px;
+  border: 1px solid #c9d3d1;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.bouton {
+  background: #0b6e64;
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  padding: 0 20px;
+  min-height: 44px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.ligne-produit {
+  padding: 12px 0;
+  border-top: 1px solid #eef2f1;
+}
