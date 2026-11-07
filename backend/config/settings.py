@@ -1,19 +1,20 @@
 """
 Django settings for config project.
 """
-
+import os
 from pathlib import Path
+
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-edmihs0g=3!a&t98!(c$m=p_vd8c7$3(4j+a%fcxmt2r!0!4&o'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = []
-
+# En production, ces valeurs viennent des "variables d'environnement" de l'hébergeur.
+# En local, les valeurs par défaut ci-dessous suffisent.
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY", "django-insecure-cle-de-developpement-seulement"
+)
+DEBUG = os.environ.get("DEBUG", "True") == "True"
+ALLOWED_HOSTS = [h for h in os.environ.get("ALLOWED_HOSTS", "").split(",") if h]
 
 # Application definition
 
@@ -25,9 +26,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'corsheaders',
     'stock',
-    'rest_framework.authtoken',
 ]
 
 # Chaque requête doit envoyer un "token" (jeton de connexion).
@@ -44,6 +45,7 @@ REST_FRAMEWORK = {
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -73,12 +75,13 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 
 # Database
+# En local : SQLite. En production : l'adresse de la base fournie par l'hébergeur.
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
+        conn_max_age=600,
+    )
 }
 
 
@@ -114,6 +117,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 
 # Email
@@ -125,6 +129,15 @@ MAILERS = {
 }
 
 
-# CORS : autorise le frontend React à appeler l'API
+# CORS : autorise le frontend React à appeler l'API.
+# En production, on ajoute l'adresse du site React via la variable CORS_ORIGINS.
 
-CORS_ALLOWED_ORIGINS = ["http://localhost:5173"]
+CORS_ALLOWED_ORIGINS = ["http://localhost:5173"] + [
+    o for o in os.environ.get("CORS_ORIGINS", "").split(",") if o
+]
+CSRF_TRUSTED_ORIGINS = [
+    o for o in os.environ.get("CSRF_ORIGINS", "").split(",") if o
+]
+
+# Derrière le proxy de l'hébergeur, Django doit savoir que la connexion est en HTTPS
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
