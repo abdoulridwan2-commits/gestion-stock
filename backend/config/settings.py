@@ -27,7 +27,19 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'stock',
+    'rest_framework.authtoken',
 ]
+
+# Chaque requête doit envoyer un "token" (jeton de connexion).
+# Sans token valide, l'API répond "non autorisé".
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.TokenAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
+    ],
+}
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

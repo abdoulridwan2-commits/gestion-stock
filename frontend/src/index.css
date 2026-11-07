@@ -254,3 +254,59 @@ h1 {
   border: 1px solid #a3200f;
   color: #a3200f;
 }
+/* Page de connexion : carte centrée sur l'écran */
+.connexion {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.connexion-carte {
+  width: 100%;
+  max-width: 380px;
+}
+
+.lien-bouton {
+  display: block;
+  width: 100%;
+  margin-top: 14px;
+  background: none;
+  border: 0;
+  color: #0b6e64;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  min-height: 44px;
+}
+
+/* Bas du menu : nom de l'utilisateur et déconnexion */
+.menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-bas {
+  margin-top: auto;
+  padding-top: 24px;
+}
+
+.menu-utilisateur {
+  color: #b9d4cf;
+  font-size: 13px;
+  margin: 0 8px 10px;
+}
+
+.menu-deconnexion {
+  width: 100%;
+  min-height: 44px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border: 0;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}

@@ -1,7 +1,16 @@
+from django.conf import settings
 from django.db import models
 
 
 class Produit(models.Model):
+    # À qui appartient ce produit : chaque commerçant ne voit que les siens
+    proprietaire = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="produits",
+        null=True,
+        blank=True,
+    )
     nom = models.CharField(max_length=100)
     categorie = models.CharField(max_length=50, blank=True)
     prix = models.DecimalField(max_digits=10, decimal_places=0)
